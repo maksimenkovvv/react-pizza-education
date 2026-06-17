@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './scss/app.scss';
 
@@ -8,6 +8,16 @@ import Sort from './components/Sort';
 import PizzaBlock from './components/PizzaBlock';
 
 function App() {
+  const [pizzas, setPizzas] = useState([]);
+
+  useEffect(() => {
+    fetch('https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas')
+      .then((res) => res.json())
+      .then((arr) => {
+        setPizzas(arr);
+      });
+  }, []);
+
   return (
     <div className="wrapper">
       <Header />
