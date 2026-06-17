@@ -1,0 +1,192 @@
+[
+  {
+    "id": 0,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf57bc517218ab93c762f4b0193e.png",
+    "title": "Пепперони Фреш",
+    "types": [0, 1],
+    "sizes": [20, 30, 35],
+    "price": 289,
+    "category": 0,
+    "rating": 4
+  },
+  {
+    "id": 1,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf40eb1171aabe90b1b3ce07c0c5.png",
+    "title": "Сырная 👶",
+    "types": [0],
+    "sizes": [20, 25, 35],
+    "price": 289,
+    "category": 0,
+    "rating": 6
+  },
+  {
+    "id": 2,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf24170179679a7872f2ddf16d18.png",
+    "title": "Чесночный цыпленок",
+    "types": [0],
+    "sizes": [25, 30, 35],
+    "price": 289,
+    "category": 1,
+    "rating": 4
+  },
+  {
+    "id": 3,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf5147f27780a3290a82692e7a36.png",
+    "title": "Креветки со сладким чили",
+    "types": [1],
+    "sizes": [20, 25, 30, 35],
+    "price": 509,
+    "category": 2,
+    "rating": 2
+  },
+  {
+    "id": 4,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf2b03447079941f2d5ac6e986a9.png",
+    "title": "Карбонара",
+    "types": [0, 1],
+    "sizes": [25, 30, 35],
+    "price": 479,
+    "category": 3,
+    "rating": 8
+  },
+  {
+    "id": 5,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198c659b357718f9c77ad0dc392dadf.png",
+    "title": "Ветчина и грибы",
+    "types": [0],
+    "sizes": [20, 25, 30, 35],
+    "price": 369,
+    "category": 2,
+    "rating": 2
+  },
+  {
+    "id": 6,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0199b77856ec79a986a2d582c2678fff.png",
+    "title": "Бургер-пицца",
+    "types": [0, 1],
+    "sizes": [20, 25, 30, 35],
+    "price": 399,
+    "category": 1,
+    "rating": 9
+  },
+  {
+    "id": 7,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf315122735a8b45cf8539df53f8.png",
+    "title": "Двойная пепперони",
+    "types": [0, 1],
+    "sizes": [20, 25, 30, 35],
+    "price": 469,
+    "category": 4,
+    "rating": 10
+  },
+  {
+    "id": 8,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf3d788b78d491891a6da5e94bf1.png",
+    "title": "Маргарита",
+    "types": [0, 1],
+    "sizes": [20, 25, 30, 35],
+    "price": 399,
+    "category": 5,
+    "rating": 10
+  },
+  {
+    "id": 9,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf4e67f474f991f04a46a49af5e6.png",
+    "title": "Жюльен",
+    "types": [0, 1],
+    "sizes": [20, 25, 30, 35],
+    "price": 429,
+    "category": 5,
+    "rating": 7
+  },
+  {
+    "id": 10,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/11EE7D6110059795842D40396BCF1E73.jpg",
+    "title": "Цыпленок барбекю",
+    "types": [0, 1],
+    "sizes": [25, 30, 35],
+    "price": 359,
+    "category": 1,
+    "rating": 7
+  },
+  {
+    "id": 11,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/11EE7D610E8BBB248F31270BE742B4BD.jpg",
+    "title": "Кисло-сладкий цыпленок",
+    "types": [0, 1],
+    "sizes": [20, 30, 35],
+    "price": 379,
+    "category": 1,
+    "rating": 6
+  },
+  {
+    "id": 12,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/11EE7D61706D472F9A5D71EB94149304.jpg",
+    "title": "Пепперони с перцем",
+    "types": [0, 1],
+    "sizes": [25, 30, 35],
+    "price": 399,
+    "category": 4,
+    "rating": 9
+  },
+  {
+    "id": 13,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/019bcbc9b40370a4b47c6298dcac292a.png",
+    "title": "Масала",
+    "types": [0, 1],
+    "sizes": [20, 25, 35],
+    "price": 339,
+    "category": 3,
+    "rating": 5
+  },
+  {
+    "id": 14,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf47733e787a98ed55d13e9a2251.png",
+    "title": "Четыре сезона",
+    "types": [0, 1],
+    "sizes": [20, 30, 35],
+    "price": 529,
+    "category": 5,
+    "rating": 8
+  },
+  {
+    "id": 15,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf530345746e98039478001d5108.png",
+    "title": "Гавайская",
+    "types": [0, 1],
+    "sizes": [25, 30, 35],
+    "price": 369,
+    "category": 2,
+    "rating": 4
+  },
+  {
+    "id": 16,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf3e424371b49f0b8d7dbe320a70.png",
+    "title": "Двойной цыпленок 👶",
+    "types": [0, 1],
+    "sizes": [20, 25, 30],
+    "price": 349,
+    "category": 3,
+    "rating": 7
+  },
+  {
+    "id": 17,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/0198bf2e5d2973a4bf5ec61161496f91.png",
+    "title": "Аррива!",
+    "types": [0, 1],
+    "sizes": [20, 30, 35],
+    "price": 469,
+    "category": 5,
+    "rating": 6
+  },
+  {
+    "id": 18,
+    "imageUrl": "https://media.dodostatic.net/image/r:520x520/019a10a0c9ab792190a97768688bc6e9.png",
+    "title": "Терияки",
+    "types": [1],
+    "sizes": [25, 30, 35],
+    "price": 379,
+    "category": 2,
+    "rating": 5
+  }
+]
