@@ -16,6 +16,7 @@ export default function Home() {
         setPizzas(arr);
         setIsLoading(false);
       });
+    window.scrollTo(0, 0);
   }, []);
 
   return (

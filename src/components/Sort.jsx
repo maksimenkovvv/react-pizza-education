@@ -16,6 +16,7 @@ export default function Sort() {
     <div className="sort">
       <div className="sort__label">
         <svg
+          transform={open ? 'rotate(180)' : ''}
           width="10"
           height="6"
           viewBox="0 0 10 6"
