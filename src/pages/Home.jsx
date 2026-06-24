@@ -4,23 +4,26 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import PizzaBlock from '../components/PizzaBlock';
 import Skeleton from '../components/PizzaBlock/Skeleton';
+import Pagination from '../components/Pagination';
 
-export default function Home() {
+export default function Home({ searchValue }) {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [orderType, setOrderType] = useState('asc');
   const [sortType, setSortType] = useState({
     id: 0,
-    name: 'популярности',
-    sort: 'rating',
+    name: 'цене',
+    sort: 'price',
     order: 'asc',
   });
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?category=${categoryId}&sortBy=${sortType.sort}&order=${orderType}`,
+      `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sortType.sort}&order=${orderType}`,
+      //поиск локальный, потому что mockapi не хочет нормально работать(
     )
       .then((res) => res.json())
       .then((arr) => {
@@ -28,9 +31,7 @@ export default function Home() {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType.sort, orderType]);
-
-  console.count('Home render');
+  }, [categoryId, sortType.sort, orderType, currentPage]);
 
   return (
     <>
@@ -56,8 +57,16 @@ export default function Home() {
       <div className="content__items">
         {isLoading
           ? [...new Array(9)].map((_, index) => <Skeleton key={index} />)
-          : pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+          : pizzas
+              .filter((pizza) => {
+                if (pizza.title.toLowerCase().includes(searchValue.toLowerCase())) {
+                  return true;
+                }
+                return false;
+              })
+              .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
       </div>
+      <Pagination onChangePage={(number) => setCurrentPage(number)} />
     </>
   );
 }

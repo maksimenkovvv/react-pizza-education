@@ -4,8 +4,8 @@ export default function Sort({ value, onClickSort, valueOrder, onClickOrder }) {
   const [open, isOpen] = useState(false);
 
   const list = [
-    { id: 0, name: 'популярности', sort: 'rating' },
-    { id: 1, name: 'цене', sort: 'price' },
+    { id: 0, name: 'цене', sort: 'price' },
+    { id: 1, name: 'популярности', sort: 'rating' },
     { id: 2, name: 'алфавиту', sort: 'title' },
   ];
 
