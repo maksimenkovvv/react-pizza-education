@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
 import { SearchContext } from '../App';
 
 import Categories from '../components/Categories';
@@ -9,24 +10,22 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import Pagination from '../components/Pagination';
 
 export default function Home() {
+  const dispatchCategory = useDispatch();
+  const { categoryId, sort } = useSelector((state) => state.filter);
+
   const { searchValue } = useContext(SearchContext);
 
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [categoryId, setCategoryId] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [orderType, setOrderType] = useState('asc');
-  const [sortType, setSortType] = useState({
-    id: 0,
-    name: 'цене',
-    sort: 'price',
-    order: 'asc',
-  });
+
+  const onClickCategory = (index) => dispatchCategory(setCategoryId(index));
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sortType.sort}&order=${orderType}`,
+      `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sort.sort}&order=${orderType}`,
       //поиск локальный, потому что mockapi не хочет нормально работать(
     )
       .then((res) => res.json())
@@ -35,7 +34,7 @@ export default function Home() {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sortType.sort, orderType, currentPage]);
+  }, [categoryId, sort.sort, orderType, currentPage]);
 
   return (
     <>
@@ -43,17 +42,13 @@ export default function Home() {
         <Categories
           value={categoryId}
           onClickCategory={(index) => {
-            setCategoryId(index);
+            onClickCategory(index);
           }}
         />
         <Sort
           valueOrder={orderType}
           onClickOrder={() => {
             setOrderType((prev) => (prev === 'asc' ? 'desc' : 'asc'));
-          }}
-          value={sortType}
-          onClickSort={(obj) => {
-            setSortType(obj);
           }}
         />
       </div>

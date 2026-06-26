@@ -7,10 +7,6 @@ export default function PizzaBlock({ title, price, imageUrl, sizes, types }) {
 
   const typeNames = ['тонкое', 'традиционное'];
 
-  const onClickAdd = () => {
-    setCount(count + 1);
-  };
-
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
@@ -43,7 +39,7 @@ export default function PizzaBlock({ title, price, imageUrl, sizes, types }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <button onClick={onClickAdd} className="button button--outline button--add">
+        <button onClick={() => setCount(count + 1)} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
