@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
 import { SearchContext } from '../App';
@@ -11,26 +12,25 @@ import Pagination from '../components/Pagination';
 
 export default function Home() {
   const dispatchCategory = useDispatch();
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, orderType } = useSelector((state) => state.filter);
 
   const { searchValue } = useContext(SearchContext);
 
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [orderType, setOrderType] = useState('asc');
 
   const onClickCategory = (index) => dispatchCategory(setCategoryId(index));
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sort.sort}&order=${orderType}`,
-      //поиск локальный, потому что mockapi не хочет нормально работать(
-    )
-      .then((res) => res.json())
+    axios
+      .get(
+        `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sort.sort}&order=${orderType}`,
+        //поиск локальный, потому что mockapi не хочет нормально работать(
+      )
       .then((arr) => {
-        setPizzas(arr);
+        setPizzas(arr.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
@@ -45,12 +45,7 @@ export default function Home() {
             onClickCategory(index);
           }}
         />
-        <Sort
-          valueOrder={orderType}
-          onClickOrder={() => {
-            setOrderType((prev) => (prev === 'asc' ? 'desc' : 'asc'));
-          }}
-        />
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

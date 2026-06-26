@@ -6,8 +6,8 @@ const initialState = {
     id: 0,
     name: 'цене',
     sort: 'price',
-    order: 'asc',
   },
+  orderType: 'asc',
 };
 
 export const filterSlice = createSlice({
@@ -20,9 +20,12 @@ export const filterSlice = createSlice({
     setSort: (state, action) => {
       state.sort = action.payload;
     },
+    setOrderType: (state) => {
+      state.orderType = state.orderType === 'asc' ? 'desc' : 'asc';
+    },
   },
 });
 
-export const { setCategoryId, setSort } = filterSlice.actions;
+export const { setCategoryId, setSort, setOrderType } = filterSlice.actions;
 
 export default filterSlice.reducer;

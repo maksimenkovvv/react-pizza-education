@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { setSort, setOrderType } from '../redux/slices/filterSlice';
 
 const list = [
   { id: 0, name: 'цене', sort: 'price' },
@@ -8,14 +8,14 @@ const list = [
   { id: 2, name: 'алфавиту', sort: 'title' },
 ];
 
-export default function Sort({ valueOrder, onClickOrder }) {
-  const dispatchSort = useDispatch();
-  const sortObj = useSelector((state) => state.filter.sort);
+export default function Sort() {
+  const dispatch = useDispatch();
+  const { sort, orderType } = useSelector((state) => state.filter);
 
   const [open, isOpen] = useState(false);
 
   const onClickActiveList = (obj) => {
-    dispatchSort(setSort(obj));
+    dispatch(setSort(obj));
     isOpen(false);
   };
 
@@ -24,9 +24,9 @@ export default function Sort({ valueOrder, onClickOrder }) {
       <div className="sort__label">
         <button
           onClick={() => {
-            onClickOrder();
+            dispatch(setOrderType());
           }}
-          className={`sort__label-button ${valueOrder === 'desc' ? 'rotate' : ''}`}>
+          className={`sort__label-button ${orderType === 'desc' ? 'rotate' : ''}`}>
           <svg
             width="10"
             height="6"
@@ -40,7 +40,7 @@ export default function Sort({ valueOrder, onClickOrder }) {
           </svg>
         </button>
         <b>Сортировка по:</b>
-        <span onClick={() => isOpen(!open)}>{sortObj.name}</span>
+        <span onClick={() => isOpen(!open)}>{sort.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
@@ -51,7 +51,7 @@ export default function Sort({ valueOrder, onClickOrder }) {
                 onClick={() => {
                   onClickActiveList(obj);
                 }}
-                className={sortObj.sort === obj.sort ? 'active' : ''}>
+                className={sort.sort === obj.sort ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}
