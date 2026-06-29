@@ -1,9 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useCallback, useState } from 'react';
+import debounce from 'lodash.debounce';
 import { SearchContext } from '../../App';
 import styles from './styles.module.scss';
 
 export default function Search() {
+  const [value, setValue] = useState('');
   const { searchValue, setSearchValue } = useContext(SearchContext);
+
+  const inputRef = useRef(null);
+
+  const onClickClear = () => {
+    setValue('');
+    setSearchValue('');
+    inputRef.current.focus();
+  };
+
+  const updateSearchValue = useCallback(
+    debounce((value) => {
+      setSearchValue(value);
+    }, 300),
+    [],
+  );
+
+  const onChangeInput = (e) => {
+    setValue(e.target.value);
+    updateSearchValue(e.target.value);
+  };
+
   return (
     <div className={styles.search}>
       <svg
@@ -38,18 +61,17 @@ export default function Search() {
           y2="20.366"></line>
       </svg>
       <input
-        value={searchValue}
+        ref={inputRef}
+        value={value}
         onChange={(e) => {
-          setSearchValue(e.target.value); //поиск локальный, потому что mockapi не хочет нормально работать(
+          onChangeInput(e); //поиск локальный, потому что mockapi не хочет нормально работать(
         }}
         className={styles.search__input}
         placeholder="Поиск пиццы"
       />
-      {searchValue && (
+      {value && (
         <svg
-          onClick={() => {
-            setSearchValue('');
-          }}
+          onClick={onClickClear}
           className={styles.search__clear}
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg">
