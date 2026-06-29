@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 
 export default function Search() {
   const [value, setValue] = useState('');
-  const { searchValue, setSearchValue } = useContext(SearchContext);
+  const { setSearchValue } = useContext(SearchContext);
 
   const inputRef = useRef(null);
 
