@@ -57,8 +57,6 @@ export default function Home() {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sortList = list.find((obj) => obj.sort === params.sortProperty);
-      console.log('params:', params);
-      console.log('sortList:', sortList);
       dispatch(
         setFilters({
           ...params,

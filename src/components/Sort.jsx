@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort, setOrderType } from '../redux/slices/filterSlice';
 
-const list = [
+export const list = [
   { id: 0, name: 'цене', sort: 'price' },
   { id: 1, name: 'популярности', sort: 'rating' },
   { id: 2, name: 'алфавиту', sort: 'title' },
@@ -13,14 +13,27 @@ export default function Sort() {
   const { sort, orderType } = useSelector((state) => state.filter);
 
   const [open, isOpen] = useState(false);
+  const sortRef = useRef(null);
 
   const onClickActiveList = (obj) => {
     dispatch(setSort(obj));
     isOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        isOpen(false);
+      }
+    };
+    document.body.addEventListener('click', handleClickOutside);
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <button
           onClick={() => {
