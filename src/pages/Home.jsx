@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
-import axios from 'axios';
+import React, { useEffect, useContext, useRef } from 'react';
 import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setFilters } from '../redux/slices/filterSlice';
+import { fetchPizzas } from '../redux/slices/pizzaSlice';
 import { SearchContext } from '../App';
 import { list } from '../components/Sort';
 
@@ -17,25 +17,15 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isSearch = useRef(false);
-  const fetchPizzas = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `https://6a3295b3c6ca2aee438543bc.mockapi.io/pizzas?page=${currentPage}&limit=4&category=${categoryId}&sortBy=${sort.sort}&order=${orderType}`,
-        //поиск локальный, потому что mockapi не хочет нормально работать(
-      )
-      .then((arr) => {
-        setPizzas(arr.data);
-        setIsLoading(false);
-      });
-  };
   const isMounted = useRef(false);
+  const { items, status } = useSelector((state) => state.pizzas);
+  const getPizzas = async () => {
+    dispatch(fetchPizzas({ currentPage, categoryId, sortProperty: sort.sort, orderType }));
+  };
 
   const { categoryId, sort, orderType, currentPage } = useSelector((state) => state.filter);
 
   const { searchValue } = useContext(SearchContext);
-  const [pizzas, setPizzas] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   const onClickCategory = (index) => dispatch(setCategoryId(index));
 
@@ -72,7 +62,7 @@ export default function Home() {
     window.scrollTo(0, 0);
 
     if (!isSearch.current) {
-      fetchPizzas();
+      getPizzas();
     }
     isSearch.current = false;
   }, [categoryId, sort.sort, orderType, currentPage]);
@@ -88,20 +78,29 @@ export default function Home() {
         />
         <Sort />
       </div>
-      <h2 className="content__title">Все пиццы</h2>
-      <div className="content__items">
-        {isLoading
-          ? [...new Array(9)].map((_, index) => <Skeleton key={index} />)
-          : pizzas
-              .filter((pizza) => {
-                if (pizza.title.toLowerCase().includes(searchValue.toLowerCase())) {
-                  return true;
-                }
-                return false;
-              })
-              .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
-      </div>
-      <Pagination />
+      {status === 'error' ? (
+        <div>
+          <h2 className="content__title">Произошла ошибка 😕</h2>
+          <p>К ОГРОМНОМУ сожалению, не удалось получить пиццы :( Во всем виноват бек</p>
+        </div>
+      ) : (
+        <>
+          <h2 className="content__title">Все пиццы</h2>
+          <div className="content__items">
+            {status === 'loading'
+              ? [...new Array(9)].map((_, index) => <Skeleton key={index} />)
+              : items
+                  .filter((pizza) => {
+                    if (pizza.title.toLowerCase().includes(searchValue.toLowerCase())) {
+                      return true;
+                    }
+                    return false;
+                  })
+                  .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+          </div>
+          <Pagination />
+        </>
+      )}
     </>
   );
 }
