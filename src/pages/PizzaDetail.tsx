@@ -5,8 +5,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 export default function PizzaDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [pizza, setPizza] = useState(null);
-  console.log(navigate);
+  const [pizza, setPizza] = useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
 
   useEffect(() => {
     async function fetchPizza() {
