@@ -22,12 +22,20 @@ export default function Home() {
   const { items, status } = useSelector(pizzasSelector);
 
   const getPizzas = async () => {
-    dispatch(fetchPizzas({ currentPage, categoryId, sortProperty: sort.sort, orderType }));
+    dispatch(
+      // @ts-ignore
+      fetchPizzas({
+        currentPage,
+        categoryId,
+        sortProperty: sort.sort,
+        orderType,
+      }),
+    );
   };
 
   const { categoryId, searchValue, sort, orderType, currentPage } = useSelector(filterSelector);
 
-  const onClickCategory = (index) => dispatch(setCategoryId(index));
+  const onClickCategory = (index: number) => dispatch(setCategoryId(index));
 
   // ⬇️ Вшивание параметров в URL при условии, что это НЕ ПЕРВЫЙ рендер
   useEffect(() => {
@@ -72,7 +80,7 @@ export default function Home() {
       <div className="content__top">
         <Categories
           value={categoryId}
-          onClickCategory={(index) => {
+          onClickCategory={(index: number) => {
             onClickCategory(index);
           }}
         />
@@ -90,13 +98,13 @@ export default function Home() {
             {status === 'loading'
               ? [...new Array(9)].map((_, index) => <Skeleton key={index} />)
               : items
-                  .filter((pizza) => {
+                  .filter((pizza: any) => {
                     if (pizza.title.toLowerCase().includes(searchValue.toLowerCase())) {
                       return true;
                     }
                     return false;
                   })
-                  .map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
+                  .map((pizza: any) => <PizzaBlock key={pizza.id} {...pizza} />)}
           </div>
           <Pagination />
         </>

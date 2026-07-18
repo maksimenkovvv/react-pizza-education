@@ -9,22 +9,25 @@ export default function Search() {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickClear = () => {
     setValue('');
     dispatch(setSearchValue(''));
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+    // или inputRef.current.?focus();
   };
 
   const updateSearchValue = useCallback(
-    debounce((value) => {
+    debounce((value: any) => {
       dispatch(setSearchValue(value));
     }, 300),
     [],
   );
 
-  const onChangeInput = (e) => {
+  const onChangeInput = (e: any) => {
     setValue(e.target.value);
     updateSearchValue(e.target.value);
   };

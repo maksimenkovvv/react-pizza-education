@@ -8,7 +8,7 @@ import logo from '../assets/img/pizza-logo.svg';
 
 export default function Header() {
   const { totalPrice, pizzas } = useSelector(cartSelector);
-  const totalCount = pizzas.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = pizzas.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const location = useLocation();
   return (

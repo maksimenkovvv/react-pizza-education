@@ -9,7 +9,7 @@ export default function Cart() {
   const dispatch = useDispatch();
   const { pizzas, totalPrice } = useSelector(cartSelector);
 
-  const totalCount = pizzas.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = pizzas.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClickClear = () => {
     dispatch(clearPizzas());
@@ -86,7 +86,7 @@ export default function Cart() {
         </div>
       </div>
       <div className="content__items">
-        {pizzas.map((pizza) => (
+        {pizzas.map((pizza: any) => (
           <CartItem key={pizza.id} {...pizza} />
         ))}
       </div>
