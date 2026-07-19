@@ -78,12 +78,7 @@ export default function Home() {
   return (
     <>
       <div className="content__top">
-        <Categories
-          value={categoryId}
-          onClickCategory={(index: number) => {
-            onClickCategory(index);
-          }}
-        />
+        <Categories value={categoryId} onClickCategory={onClickCategory} />
         <Sort />
       </div>
       {status === 'error' ? (

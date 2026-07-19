@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, ChangeEvent } from 'react';
 import debounce from 'lodash.debounce';
 import styles from './styles.module.scss';
 
@@ -21,15 +21,15 @@ export default function Search() {
   };
 
   const updateSearchValue = useCallback(
-    debounce((value: any) => {
+    debounce((value: string) => {
       dispatch(setSearchValue(value));
     }, 300),
     [],
   );
 
-  const onChangeInput = (e: any) => {
-    setValue(e.target.value);
-    updateSearchValue(e.target.value);
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
   };
 
   return (
@@ -68,8 +68,8 @@ export default function Search() {
       <input
         ref={inputRef}
         value={value}
-        onChange={(e) => {
-          onChangeInput(e); //поиск локальный, потому что mockapi не хочет нормально работать(
+        onChange={(event) => {
+          onChangeInput(event); //поиск локальный, потому что mockapi не хочет нормально работать(
         }}
         className={styles.search__input}
         placeholder="Поиск пиццы"

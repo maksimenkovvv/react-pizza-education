@@ -2,7 +2,7 @@ import React from 'react';
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
+  onClickCategory: (index: number) => void;
 };
 
 export default function Categories({ value, onClickCategory }: CategoriesProps) {
